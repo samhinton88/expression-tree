@@ -10,7 +10,10 @@ const { isSubNodeOrNumber, isSubNode } = require("./validation");
  * tree(42) -> numeric primitive - string representation: "42"
  * tree(23, 19) -> implicit binary expression - string representation: "(23 + 19)"
  * tree("+", 23, 19) -> binary expression - string representation: "(23 + 19)"
- *
+ * 
+ * Trees can be nested
+ * tree(tree(42)) -> numeric primitive - string representation: "42"
+ * 
  * interface Node {
  *   result: () => number
  *   toString: () => string
