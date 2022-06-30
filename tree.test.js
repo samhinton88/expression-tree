@@ -44,5 +44,13 @@ describe("tree", () => {
     it("should allow for nested trees", () => {
       expect(tree("+", 2, tree("+", 2, 3)).result()).toBe(7);
     });
+
+    it("should throw if passed objects which are not valid Nodes", () => {
+      expect(() => tree("+", 2, { some: "garbage" })).toThrow();
+      expect(() => tree("+", { some: "garbage" }, 2)).toThrow();
+      expect(() =>
+        tree("+", { some: "garbage" }, { some: "garbage" })
+      ).toThrow();
+    });
   });
 });
