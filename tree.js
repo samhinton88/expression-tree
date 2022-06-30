@@ -1,5 +1,5 @@
-const { numericPrimitive, binaryExpression } = require('./models');
-
+const { numericPrimitive, binaryExpression } = require("./models");
+const { isSubNodeOrNumber, isSubNode } = require("./validation");
 
 /**
  * tree(42) -> numeric primitive - string representation: "42"
@@ -17,20 +17,19 @@ const tree = (first, second, third) => {
 
   let operation, leftHandSide, rightHandSide;
 
-  if (typeof first === 'number') {
-    operation = '+';
-    
-    leftHandSide = typeof first === 'object' ? first : tree(first) ;
-    rightHandSide = typeof second === 'object' ? second : tree(second);
+  if (isSubNodeOrNumber(first)) {
+    operation = "+";
+
+    leftHandSide = isSubNode(first) ? first : tree(first);
+    rightHandSide = isSubNode(second) ? second : tree(second);
   } else {
     operation = first;
-    
-    leftHandSide = typeof second === 'object' ? second : tree(second) ;
-    rightHandSide = typeof third === 'object' ? third : tree(third);
+
+    leftHandSide = isSubNode(second) ? second : tree(second);
+    rightHandSide = isSubNode(third) ? third : tree(third);
   }
 
-
-  return binaryExpression({ leftHandSide, rightHandSide, operation })
+  return binaryExpression({ leftHandSide, rightHandSide, operation });
 };
 
 module.exports = tree;

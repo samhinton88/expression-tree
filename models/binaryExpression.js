@@ -1,3 +1,4 @@
+const { isSubNode } = require('../validation')
 const { EXPRESSION_TYPE, BINARY_EXPRESSION } = require('../constants')
 
 const operationMap = {
@@ -6,10 +7,6 @@ const operationMap = {
     '/': (a, b) => a / b,
     'x': (a, b) => a * b
 }
-
-const isObject = (candidate) => typeof candidate === 'object' && candidate !== null;
-
-const isSubNode = (candidate) => isObject(candidate) && (EXPRESSION_TYPE in candidate)
 
 const binaryExpression = ({ leftHandSide, rightHandSide, operation }) => {
   if (!isSubNode(leftHandSide)) {

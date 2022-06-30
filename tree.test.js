@@ -44,6 +44,12 @@ describe("tree", () => {
     it("should interpret usage with two numeric arguments as an addition", () => {
       expect(tree(2, 3).result()).toBe(5);
     });
+
+    it("should interpret usage with two nested arguments as an addition", () => {
+      expect(tree(tree(2), 3).result()).toBe(5);
+      expect(tree(2, tree(3)).result()).toBe(5);
+      expect(tree(tree(2), tree(3)).result()).toBe(5);
+    });
   });
 
   describe("nesting", () => {
