@@ -2,7 +2,33 @@ const { numericPrimitive, binaryExpression } = require("./models");
 const { isSubNodeOrNumber, isSubNode } = require("./validation");
 
 /**
+ * Orchestration function to build expressions.
+ *
+ * The tree currently supports either
+ * primitive numbers or binary expressions
+ *
  * tree(42) -> numeric primitive - string representation: "42"
+ * tree(23, 19) -> implicit binary expression - string representation: "(23 + 19)"
+ * tree("+", 23, 19) -> binary expression - string representation: "(23 + 19)"
+ *
+ * interface Node {
+ *   result: () => number
+ *   toString: () => string
+ * }
+ *
+ * 
+ * tree() should be seen as a controller or convenience function
+ * where the are requirements for a finer grain developers can 
+ * build expression graphs from models directly:
+ * binaryExpression({
+ *   leftHandSide: binaryExpression({ 
+ *      leftHandSide: primitiveNumber({ value: 5 }), 
+ *      rightHandSide: primitiveNumber({ value: 10 }),
+ *      operation: '*'
+ *    }),
+ *    rightHandSide: primitiveNumber({ value: 12 }),
+ *    operation: '+'
+ * }) // -> 62
  * @param {number} first
  * @returns
  */
