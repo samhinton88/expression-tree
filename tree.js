@@ -35,7 +35,7 @@ const { isSubNodeOrNumber, isSubNode } = require("./validation");
  * @param {string|number|Node} first
  * @param {number|Node} second
  * @param {number|Node} third
- * @returns
+ * @returns Node
  */
 const tree = (first, second, third) => {
   if (
