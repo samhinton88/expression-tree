@@ -29,7 +29,9 @@ const { isSubNodeOrNumber, isSubNode } = require("./validation");
  *    rightHandSide: primitiveNumber({ value: 12 }),
  *    operation: '+'
  * }) // -> 62
- * @param {number} first
+ * @param {string|number|Node} first
+ * @param {number|Node} second
+ * @param {number|Node} third
  * @returns
  */
 const tree = (first, second, third) => {
