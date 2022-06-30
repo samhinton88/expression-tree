@@ -24,11 +24,11 @@ const tree = (first, second, third) => {
   }
 
   const operation = first;
-  const leftHandSide = second;
-  const rightHandSide = third;
+  const leftHandSide = typeof second === 'object' ? second : tree(second) ;
+  const rightHandSide = typeof third === 'object' ? third : tree(third);
 
   return {
-    result: () => operationMap[operation](leftHandSide, rightHandSide),
+    result: () => operationMap[operation](leftHandSide.result(), rightHandSide.result()),
     toString: () => `(${leftHandSide} ${operation} ${rightHandSide})`,
   };
 };

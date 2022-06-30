@@ -39,4 +39,10 @@ describe("tree", () => {
       expect(tree("/", 2, 3).toString()).toBe("(2 / 3)");
     });
   });
+
+  describe("nesting", () => {
+    it("should allow for nested trees", () => {
+      expect(tree("+", 2, tree("+", 2, 3)).result()).toBe(7);
+    });
+  });
 });
