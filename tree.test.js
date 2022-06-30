@@ -48,17 +48,20 @@ describe("tree", () => {
     it("should interpret usage with two numeric arguments as an addition", () => {
       expect(tree(2, 3).result()).toBe(5);
     });
-
-    it("should interpret usage with two nested arguments as an addition", () => {
-      expect(tree(tree(2), 3).result()).toBe(5);
-      expect(tree(2, tree(3)).result()).toBe(5);
-      expect(tree(tree(2), tree(3)).result()).toBe(5);
-    });
   });
 
   describe("nesting", () => {
     it("should allow for nested trees", () => {
       expect(tree("+", 2, tree("+", 2, 3)).result()).toBe(7);
+      
+      expect(tree("+", 2, tree("+", 2, 3)).toString()).toBe("(2 + (2 + 3))");
+      const threeTimesEight = tree("x", 3, 8);
+      expect(
+        tree('-', threeTimesEight, tree('x', threeTimesEight, threeTimesEight, tree(threeTimesEight))).result()
+      ).toBe(-552);
+      expect(
+        tree('-', threeTimesEight, tree('x', threeTimesEight, threeTimesEight, tree(threeTimesEight))).toString()
+      ).toBe("((3 x 8) - ((3 x 8) x (3 x 8)))");
     });
 
     it("should throw if passed objects which are not valid Nodes", () => {
@@ -68,5 +71,15 @@ describe("tree", () => {
         tree("+", { some: "garbage" }, { some: "garbage" })
       ).toThrow();
     });
+
+    it("should interpret usage with two nested arguments as an addition", () => {
+        expect(tree(tree(2), 3).result()).toBe(5);
+        expect(tree(2, tree(3)).result()).toBe(5);
+        expect(tree(tree(2), tree(3)).result()).toBe(5);
+  
+        expect(tree(tree(2), 3).toString()).toBe("(2 + 3)");
+        expect(tree(2, tree(3)).toString()).toBe("(2 + 3)");
+        expect(tree(tree(2), tree(3)).toString()).toBe("(2 + 3)");
+      });
   });
 });
