@@ -1,3 +1,8 @@
+const operationMap = {
+    '+': (a, b) => a + b,
+    '-': (a, b) => a - b
+}
+
 /**
  * tree(42) -> numeric primitive - string representation: "42"
  * @param {number} first
@@ -16,9 +21,13 @@ const tree = (first, second, third) => {
     return { result: () => first, toString: () => first.toString() };
   }
 
+  const operation = first;
+  const leftHandSide = second;
+  const rightHandSide = third;
+
   return {
-    result: () => second + third,
-    toString: () => `(${second} + ${third})`,
+    result: () => operationMap[operation](leftHandSide, rightHandSide),
+    toString: () => `(${leftHandSide} ${operation} ${rightHandSide})`,
   };
 };
 

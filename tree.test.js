@@ -19,5 +19,9 @@ describe("tree", () => {
     it("should parse binary expressions with addition", () => {
         expect(tree("+", 2, 3).result()).toBe(5);
     })
+
+    it("should parse binary expressions with subtraction", () => {
+        expect(tree("-", 3, 2).result()).toBe(1);
+    })
   })
 });
