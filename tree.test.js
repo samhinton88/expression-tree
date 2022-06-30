@@ -17,11 +17,26 @@ describe("tree", () => {
 
   describe("binary expression", () => {
     it("should parse binary expressions with addition", () => {
-        expect(tree("+", 2, 3).result()).toBe(5);
-    })
+      expect(tree("+", 2, 3).result()).toBe(5);
+    });
 
     it("should parse binary expressions with subtraction", () => {
-        expect(tree("-", 3, 2).result()).toBe(1);
-    })
-  })
+      expect(tree("-", 3, 2).result()).toBe(1);
+    });
+
+    it("should parse binary expressions with multiplication", () => {
+      expect(tree("x", 3, 2).result()).toBe(6);
+    });
+
+    it("should parse binary expressions with division", () => {
+      expect(tree("/", 4, 2).result()).toBe(2);
+    });
+
+    it("should represent binary expressions with parenthesis and the correct operator", () => {
+      expect(tree("+", 2, 3).toString()).toBe("(2 + 3)");
+      expect(tree("-", 2, 3).toString()).toBe("(2 - 3)");
+      expect(tree("x", 2, 3).toString()).toBe("(2 x 3)");
+      expect(tree("/", 2, 3).toString()).toBe("(2 / 3)");
+    });
+  });
 });
