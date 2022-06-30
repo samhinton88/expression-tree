@@ -1,6 +1,4 @@
 const { numericPrimitive, binaryExpression } = require('./models');
-const { EXPRESSION_TYPE } = require('./constants');
-
 
 
 /**
@@ -17,10 +15,20 @@ const tree = (first, second, third) => {
     return numericPrimitive({ value: first });
   }
 
-  const operation = first;
+  let operation, leftHandSide, rightHandSide;
 
-  const leftHandSide = typeof second === 'object' ? second : tree(second) ;
-  const rightHandSide = typeof third === 'object' ? third : tree(third);
+  if (typeof first === 'number') {
+    operation = '+';
+    
+    leftHandSide = typeof first === 'object' ? first : tree(first) ;
+    rightHandSide = typeof second === 'object' ? second : tree(second);
+  } else {
+    operation = first;
+    
+    leftHandSide = typeof second === 'object' ? second : tree(second) ;
+    rightHandSide = typeof third === 'object' ? third : tree(third);
+  }
+
 
   return binaryExpression({ leftHandSide, rightHandSide, operation })
 };

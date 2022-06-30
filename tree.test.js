@@ -40,6 +40,12 @@ describe("tree", () => {
     });
   });
 
+  describe("implicit binary expression", () => {
+    it("should interpret usage with two numeric arguments as an addition", () => {
+      expect(tree(2, 3).result()).toBe(5);
+    });
+  });
+
   describe("nesting", () => {
     it("should allow for nested trees", () => {
       expect(tree("+", 2, tree("+", 2, 3)).result()).toBe(7);
