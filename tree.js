@@ -25,11 +25,11 @@ const { isSubNodeOrNumber, isSubNode } = require("./validation");
  * build expression graphs from models directly:
  * binaryExpression({
  *   leftHandSide: binaryExpression({ 
- *      leftHandSide: primitiveNumber({ value: 5 }), 
- *      rightHandSide: primitiveNumber({ value: 10 }),
+ *      leftHandSide: numericPrimitive({ value: 5 }), 
+ *      rightHandSide: numericPrimitive({ value: 10 }),
  *      operation: '*'
  *    }),
- *    rightHandSide: primitiveNumber({ value: 12 }),
+ *    rightHandSide: numericPrimitive({ value: 12 }),
  *    operation: '+'
  * }) // -> 62
  * @param {string|number|Node} first
