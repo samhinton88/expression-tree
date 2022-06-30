@@ -40,6 +40,10 @@ const tree = (first, second, third) => {
     second === undefined &&
     third === undefined
   ) {
+    if (isSubNode(first)) {
+        return first
+    }
+
     return numericPrimitive({ value: first });
   }
 

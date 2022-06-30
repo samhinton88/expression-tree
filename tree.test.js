@@ -13,6 +13,10 @@ describe("tree", () => {
     it("should throw if given a single argument that is a numeric string", () => {
       expect(() => tree("2").toString()).toThrow();
     });
+
+    it("should play nicely when given a nested node", () => {
+      expect(tree(tree(2)).result()).toBe(2);
+    });
   });
 
   describe("binary expression", () => {
