@@ -36,6 +36,10 @@ describe("tree", () => {
       expect(tree("/", 4, 2).result()).toBe(2);
     });
 
+    it("should throw with bad operator symbols", () => {
+        expect(() => tree("WTF", 4, 2).result()).toThrow("WTF is not a valid operator");
+      });
+
     it("should represent binary expressions with parenthesis and the correct operator", () => {
       expect(tree("+", 2, 3).toString()).toBe("(2 + 3)");
       expect(tree("-", 2, 3).toString()).toBe("(2 - 3)");

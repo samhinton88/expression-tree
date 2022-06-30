@@ -17,10 +17,16 @@ const binaryExpression = ({ leftHandSide, rightHandSide, operation }) => {
     throw new Error("Binary expressions only accept Nodes");
   }
 
+  if (!(operation in operationMap)) {
+    throw new Error(operation + " is not a valid operator")
+  }
+
   return {
     result: () =>
       operationMap[operation](leftHandSide.result(), rightHandSide.result()),
-    toString: () => `(${leftHandSide} ${operation} ${rightHandSide})`,
+      // we don't need to call .toString on the operands as this is automatically called
+      // in the string literal   
+      toString: () => `(${leftHandSide} ${operation} ${rightHandSide})`,
     [EXPRESSION_TYPE]: BINARY_EXPRESSION,
   };
 };
