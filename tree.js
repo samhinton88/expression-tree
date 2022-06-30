@@ -1,3 +1,5 @@
+const { numericPrimitive } = require('./models');
+const { EXPRESSION_TYPE } = require('./constants');
 const operationMap = {
     '+': (a, b) => a + b,
     '-': (a, b) => a - b,
@@ -5,14 +7,14 @@ const operationMap = {
     'x': (a, b) => a * b
 }
 
-const EXPRESSION_TYPE = Symbol("EXPRESSION_TYPE");
+
 
 const isObject = (candidate) => typeof candidate === 'object' && candidate !== null;
 
 const isSubNode = (candidate) => isObject(candidate) && (EXPRESSION_TYPE in candidate)
 
 const BINARY_EXPRESSION = 'BINARY_EXPRESSION';
-const NUMERIC_PRIMITIVE = 'NUMERIC_PRIMITIVE';
+
 
 /**
  * tree(42) -> numeric primitive - string representation: "42"
@@ -20,16 +22,13 @@ const NUMERIC_PRIMITIVE = 'NUMERIC_PRIMITIVE';
  * @returns
  */
 const tree = (first, second, third) => {
+  console.log({ first, second, third })
   if (
     typeof first !== undefined &&
     second === undefined &&
     third === undefined
   ) {
-    if (typeof first !== "number") {
-      throw new Error("Value should be a number");
-    }
-
-    return { result: () => first, toString: () => first.toString(), [EXPRESSION_TYPE]: NUMERIC_PRIMITIVE };
+    return numericPrimitive({ value: first });
   }
 
   const operation = first;
