@@ -20,8 +20,8 @@ const { isSubNodeOrNumber, isSubNode } = require("./validation");
  * }
  *
  * 
- * tree() should be seen as a controller or convenience function
- * where the are requirements for a finer grain developers can 
+ * tree() should be seen as a controller or convenience function;
+ * where there are requirements for a finer grain, developers can 
  * build expression graphs from models directly:
  * binaryExpression({
  *   leftHandSide: binaryExpression({ 
